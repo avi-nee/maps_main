@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maps_main/dispose_appeal.dart';
 import 'category.dart';
 import 'tax_detail.dart';
 import 'new_appeal.dart';
@@ -47,69 +48,109 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: Category.samples.length,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return TaxDetail(
-                            category: Category.samples[index],
-                          );
-                        },
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: Category.samples.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return TaxDetail(
+                              category: Category.samples[index],
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: buildCategoryCard(Category.samples[index]),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Expanded(
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: [
+                          IconButton(
+                              style: const ButtonStyle(
+                               // backgroundColor: MaterialStatePropertyAll(Colors.yellowAccent),
+                                //side: MaterialStatePropertyAll()
+                              ),
+                              icon: const Icon(Icons.add),
+                              iconSize: 50,
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return const NewAppeal();
+                                  },
+                                ));
+                              }),
+                          const Text('Add'),
+                        ],
                       ),
-                    );
-                  },
-                  child: buildCategoryCard(Category.samples[index]),
-                );
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                        icon: const Icon(Icons.add),
-                        iconSize: 50,
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return const NewAppeal();
-                            },
-                          ));
-                        }),
-                    IconButton(
-                        icon: const Icon(Icons.search),
-                        iconSize: 50,
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return const SearchAppeal();
-                            },
-                          ));
-                        }),
-                    IconButton(
-                        icon: const Icon(Icons.read_more),
-                        iconSize: 50,
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return const AppealReport();
-                            },
-                          ));
-                        }),
-                  ]),
-            ),
-          ],
+                      Column(
+                        children: [
+                          IconButton(
+                              icon: const Icon(Icons.remove),
+                              iconSize: 50,
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return const DisposeAppeal();
+                                  },
+                                ));
+                              }),
+                          const Text('Dispose'),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          IconButton(
+                              icon: const Icon(Icons.search_outlined),
+                              iconSize: 50,
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return const SearchAppeal();
+                                  },
+                                ));
+                              }),
+                          const Text('Search'),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          IconButton(
+                              icon: const Icon(Icons.align_vertical_bottom_rounded),
+                              iconSize: 50,
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return const AppealReport();
+                                  },
+                                ));
+                              }),
+                          const Text('Report'),
+                        ],
+                      ),
+                    ]),
+              ),
+              
+            ],
+          ),
         ),
       ),
     );
@@ -120,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
       color: Colors.greenAccent,
       elevation: 4.0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(100.0),
       ),
       child: Padding(
         padding: const EdgeInsets.all(80.0),

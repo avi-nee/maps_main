@@ -39,6 +39,9 @@ class _NewAppeal extends State<NewAppeal> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -240,6 +243,21 @@ class _NewAppeal extends State<NewAppeal> {
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter details';
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Jurisdiction",
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
